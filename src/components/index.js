@@ -1,0 +1,9 @@
+export { default as Navbar } from "./Navbar/Navbar";
+export { default as Footer } from "./Footer/Footer";
+export { default as Home } from "./Home/Home";
+export { default as Cart } from "./Cart/Cart";
+export { default as CartPage } from "./CartPage/CartPage";
+export { default as Categories } from "./Categories/Categories";
+export { default as Category } from "./Category/Category";
+export { default as ProductDetails } from "./ProductDetails/ProductDetails";
+export { default as Checkout } from "./CheckoutForm/Checkout/Checkout";
