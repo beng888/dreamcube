@@ -144,12 +144,7 @@ const Navbar = withRouter(({ totalItems, location }) => {
             }}
           >
             {location.pathname === "/" && (
-              <motion.div
-                initial={{ scale: 1.2, filter: "brightness(0%)" }}
-                animate={{ scale: 1, filter: "brightness(100%)" }}
-                transition={{ duration: 2 }}
-                className={classes.appBarBackground}
-              />
+              <motion.div className={classes.appBarBackground} />
             )}
             <Container style={{ maxWidth: "1500px" }}>
               <Grid container justify="space-between" alignItems="center">

@@ -37,8 +37,33 @@ export default makeStyles((theme, location) => ({
   },
 
   appBarBackground: {
-    backgroundImage: `url(${BG})`,
-    backgroundSize: "cover",
+    "&:after": {
+      content: '""',
+      position: "absolute",
+      margin: "auto",
+      left: "0",
+      right: "0",
+      top: "0",
+      bottom: "0",
+      backgroundImage: `url(${BG})`,
+      backgroundSize: "cover",
+      animation: "$animation 3000ms ",
+    },
+    "@global": {
+      "@keyframes animation": {
+        "0%": {
+          filter: "brightness(0%)",
+          transform: "scale(1.2)",
+        },
+        "100%": {
+          filter: "brightness(100%)",
+          transform: "scale(1)",
+        },
+      },
+    },
+    // backgroundImage: `url(${BG})`,
+    // backgroundSize: "cover",
+    overflow: "hidden",
     position: "absolute",
     margin: "auto",
     left: "0",

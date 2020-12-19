@@ -26,7 +26,7 @@ export default function Pagination({ datas, category, c }) {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    window.scrollTo(0, 800);
+    // window.scrollTo(0, 800);
   };
 
   const handleChangeRowsPerPage = (event) => {

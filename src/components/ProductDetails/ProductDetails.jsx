@@ -115,7 +115,13 @@ const ProductDetails = ({ match, location }) => {
                 )}
                 <Divider style={{ margin: "2rem 0" }} />{" "}
                 {productDetails.quantity === 0 ? (
-                  <Button className={globalClasses.button}>
+                  <Button
+                    className={globalClasses.button}
+                    onClick={() => {
+                      value.handleAddToCart(productDetails.id, 1);
+                      globalDispatch({ type: "OPENCART" });
+                    }}
+                  >
                     TEST PURCHASE
                   </Button>
                 ) : (
