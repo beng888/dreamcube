@@ -29,6 +29,8 @@ export default makeStyles((theme) => ({
     "& img": {
       minWidth: "50%",
       width: "100%",
+      maxHeight: "200px",
+      [theme.breakpoints.down("sm")]: { maxHeight: "300px" },
     },
 
     "& div ": {
@@ -43,7 +45,7 @@ export default makeStyles((theme) => ({
       padding: "1rem",
 
       "& p ": {
-        background: "#fff",
+        background: "rgba(255,255,255,0.7)",
         width: "fit-content",
         margin: "auto",
         padding: "0.2rem 1rem",

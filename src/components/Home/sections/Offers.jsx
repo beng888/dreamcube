@@ -1,11 +1,12 @@
 import { Button, Grid, Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 
 import useStyles from "../styles";
 
-const Offers = () => {
+const Offers = ({ menus }) => {
   const classes = useStyles();
 
   const controls = useAnimation();
@@ -40,10 +41,14 @@ const Offers = () => {
           <Typography variant="body1">
             We offer unique and collectible Japanese puzzle boxes and other
             wooden puzzle boxes from around the world. You'll find Karakuri,
-            Romanian, German, Moroccan, Czech, and Vintage secret trick puzzle
-            boxes throughout our store.
+            Romanian, German, Czech, and Vintage secret trick puzzle boxes
+            throughout our store.
           </Typography>
-          <Button>SHOP NOW</Button>
+          <Button>
+            <Link to={`/collections/${menus[0].name},${menus[0].url}`}>
+              SHOP NOW
+            </Link>
+          </Button>
         </Grid>
         <Grid item className={classes.offer}>
           <Typography
@@ -60,7 +65,11 @@ const Offers = () => {
             guarantee our puzzle boxes are of the finest quality and at
             affordable prices.
           </Typography>
-          <Button>SHOP NOW</Button>
+          <Button>
+            <Link to={`/collections/${menus[1].name},${menus[1].url}`}>
+              SHOP NOW
+            </Link>
+          </Button>
         </Grid>
       </Grid>
     </motion.div>

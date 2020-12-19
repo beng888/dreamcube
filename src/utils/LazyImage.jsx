@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
-import { registerObserver } from "../../../../helpers/intersectionObserver";
+import { registerObserver } from "../helpers/intersectionObserver";
 export default function Image({ src, alt, style }) {
   const [showImage, setShowImage] = useState(false);
   const placeHolderRef = useRef(null);
@@ -17,10 +17,11 @@ export default function Image({ src, alt, style }) {
       <motion.img
         src={src}
         alt={alt}
-        style={{ width: "100%" }}
+        style={{ width: "100%", maxHeight: "500px" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
+        loading="lazy"
       />
     );
   }

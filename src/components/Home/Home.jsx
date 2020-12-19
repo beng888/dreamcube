@@ -1,18 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import {
-  Button,
-  Grid,
-  Typography,
-  Divider,
-  IconButton,
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { AddShoppingCart } from "@material-ui/icons";
+import React, { useContext } from "react";
+import { Grid, Typography } from "@material-ui/core";
+import { motion } from "framer-motion";
 
 import { AppContext } from "../../lib/commerce";
-import Product from "./Product/Product";
 import useStyles from "./styles";
 import Offers from "./sections/Offers";
 import DreamCube from "./sections/DreamCube";
@@ -21,6 +11,31 @@ import ItemList from "./sections/ItemList";
 const Home = () => {
   const classes = useStyles();
   const value = useContext(AppContext);
+
+  let categories = value.categories;
+
+  const categoryGroup = categories.slice(10, 20);
+  const categoryGroup2 = categories.slice(0, 10);
+  const categoryGroup3 = categories.slice(0, 20);
+
+  const menus = [
+    {
+      name: "PUZZLE BOXES",
+      list: categoryGroup,
+      url: [categoryGroup.map((m) => m.slug)],
+    },
+    {
+      name: "NOTABLES CRAFTSMEN WORKS",
+      list: categoryGroup2,
+      url: [categoryGroup2.map((m) => m.slug)],
+    },
+    {
+      name: "ALL PRODUCTS",
+      list: categoryGroup3,
+      url: [categoryGroup3.map((m) => m.slug)],
+    },
+  ];
+
   console.log(value.products);
   // console.log(value.products[0].categories[0].name);
 
@@ -52,8 +67,9 @@ const Home = () => {
         </Grid>
 
         {/* COMPONENTS */}
-        <Offers />
-        <ItemList />
+        <Offers menus={menus} />
+
+        <ItemList menus={menus} />
         <DreamCube />
         {/* COMPONENTS */}
       </Grid>

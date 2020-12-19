@@ -29,21 +29,21 @@ export const ContextWrapper = (props) => {
     setCategories(data);
   };
 
-  const fetchCategory = async () => {
-    setCategory(
-      await commerce.categories.retrieve("samsung", {
-        type: "slug",
-      })
-    );
-  };
+  // const fetchCategory = async () => {
+  //   setCategory(
+  //     await commerce.categories.retrieve("samsung", {
+  //       type: "slug",
+  //     })
+  //   );
+  // };
 
-  const fetchCategoryProducts = async () => {
-    const { data } = await commerce.products.list({
-      category_slug: "samsung",
-    });
+  // const fetchCategoryProducts = async () => {
+  //   const { data } = await commerce.products.list({
+  //     category_slug: "samsung",
+  //   });
 
-    setCategoryProducts(data);
-  };
+  //   setCategoryProducts(data);
+  // };
 
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve());
@@ -95,8 +95,8 @@ export const ContextWrapper = (props) => {
   useEffect(() => {
     fetchProducts();
     fetchCategories();
-    fetchCategory();
-    fetchCategoryProducts();
+    // fetchCategory();
+    // fetchCategoryProducts();
     fetchCart();
   }, []);
 

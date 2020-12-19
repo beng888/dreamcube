@@ -1,14 +1,6 @@
 import React, { useContext } from "react";
-import {
-  AppBar,
-  IconButton,
-  Badge,
-  Grid,
-  Container,
-  Divider,
-} from "@material-ui/core";
+import { AppBar, Grid, Container, Divider } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link, withRouter } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -25,10 +17,11 @@ const Navbar = withRouter(({ totalItems, location }) => {
   const value = useContext(AppContext);
   let categories = value.categories;
 
-  // console.log(categories);
+  console.log(categories);
 
-  const categoryOne = categories.slice(0, 5);
-  const categoryTwo = categories.slice(3, 6);
+  const categoryOne = categories.slice(14, 20);
+  const categoryTwo = categories.slice(10, 14);
+  const categoryThree = categories.slice(0, 10);
 
   // console.log(categoryOne);
   // console.log(categoryTwo);
@@ -41,15 +34,20 @@ const Navbar = withRouter(({ totalItems, location }) => {
 
   const menus = [
     {
-      name: "PUZZLE BOXES",
+      name: "JAPANESE BOXES",
       list: categoryOne,
       url: [categoryOne.map((m) => m.slug)],
     },
-    // { name: "OTHER PUZZLES", list: categoryTwo },
-
-    // "Escape Room Items",
-    // "New Arrivals",
-    // "Past Works",
+    {
+      name: "WESTERN BOXES",
+      list: categoryTwo,
+      url: [categoryTwo.map((m) => m.slug)],
+    },
+    {
+      name: "BY CRAFTSMAN",
+      list: categoryThree,
+      url: [categoryThree.map((m) => m.slug)],
+    },
   ];
 
   // console.log(menus[0].list[0]);
@@ -66,8 +64,9 @@ const Navbar = withRouter(({ totalItems, location }) => {
   };
 
   const stretchHr = {
-    initial: { width: "0", border: "0px solid #000" },
+    initial: { width: "0" },
     hover: {
+      display: "block",
       width: "100%",
       transition: { delay: 0.2, duration: 0.5, ease: "easeOut" },
       border: "1px solid #000",
@@ -103,11 +102,7 @@ const Navbar = withRouter(({ totalItems, location }) => {
         <motion.hr variants={stretchHr} transition={{ duration: 0.5 }} />
         <motion.ul variants={showList} className={classes.menuListContainer}>
           {list.map((listItem, l) => (
-            <motion.li
-              key={l}
-              className={classes.menuList}
-              whileHover={{ scaleX: 1.1, originX: 0 }}
-            >
+            <motion.li key={l} className={classes.menuList}>
               <Link to={`/collections/:categories/${listItem.slug}`}>
                 {listItem.name}
               </Link>
@@ -188,9 +183,16 @@ const Navbar = withRouter(({ totalItems, location }) => {
                 container
                 direction="row"
                 justify="center"
+                alignItems="center"
                 className={classes.menuContainer}
               >
+                <Link to="/" className={classes.menuLink}>
+                  HOME
+                </Link>
                 {menuList}
+                <Link to="/blogs" className={classes.menuLink}>
+                  PARABLOGX
+                </Link>
               </Grid>
             </Container>
           </AppBar>

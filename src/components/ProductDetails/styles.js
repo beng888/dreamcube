@@ -32,7 +32,7 @@ export default makeStyles((theme) => ({
     "& div": {
       margin: "0 auto",
       textAlign: "center",
-      "& img": { width: "100%" },
+      "& img": { width: "100%", maxHeight: "180px" },
     },
   },
   relatedItems: {

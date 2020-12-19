@@ -15,6 +15,8 @@ import { AppContext } from "../../lib/commerce";
 import ImgGallery from "./sections/ImgGallery";
 import Related from "./sections/Related";
 import Context from "../../GlobalState/context";
+import Skeletons2 from "../../utils/Skeletons2";
+import Skeletons3 from "../../utils/Skeletons3";
 
 const ProductDetails = ({ match, location }) => {
   const { globalDispatch } = useContext(Context);
@@ -22,6 +24,7 @@ const ProductDetails = ({ match, location }) => {
   const classes = useStyles();
   const globalClasses = globalStyles();
   const [productDetails, setProductDetails] = useState({});
+  const [loading, setLoading] = useState(false);
   const value = useContext(AppContext);
 
   const href = window.location.href;
@@ -29,14 +32,16 @@ const ProductDetails = ({ match, location }) => {
 
   const fetchProductDetails = async () => {
     setProductDetails(await commerce.products.retrieve(match.params.productId));
+    setLoading(false);
   };
   useEffect(() => {
+    setLoading(true);
     fetchProductDetails();
   }, []);
 
   //   imgSource = productDetails.media.source;
 
-  // console.log(productDetails);
+  console.log(productDetails);
   // console.log(productDetails.assets);
 
   const opts = {
@@ -56,22 +61,23 @@ const ProductDetails = ({ match, location }) => {
       productDetails.variants[0].options[0].name
   );
 
-  // const useStyles2 = makeStyles((theme) => ({
-
-  //   category: {
-  //     minHeight: "20vw",
-  //     [theme.breakpoints.down("xs")]: {
-  //       minHeight: "150vw",
-  //     },
-  //   },
-  // }));
-
-  // const classes2 = useStyles2();
-
   const slug =
     productDetails.categories &&
     productDetails.categories[0] &&
     productDetails.categories[0].slug;
+
+  console.log(slug);
+
+  const name =
+    productDetails.categories &&
+    productDetails.categories[0] &&
+    productDetails.categories[0].name;
+
+  const price =
+    productDetails &&
+    productDetails.price &&
+    productDetails.price.formatted_with_symbol &&
+    productDetails.price.formatted_with_symbol;
 
   return (
     <>
@@ -82,62 +88,93 @@ const ProductDetails = ({ match, location }) => {
         className={classes.container}
       >
         {/* {!cart.line_items.length ? <EmptyCart /> : <FilledCart />} */}
-        <Grid style={{ margin: "auto" }} container>
-          <Grid item xs={12} md={7}>
-            <ImgGallery assets={productDetails.assets} />
-          </Grid>
-          <Grid item xs={12} md={5} className={classes.details}>
-            <Typography variant="h3">{productDetails.name}</Typography>
-            <Typography variant="subtitle1">
-              {productDetails &&
-              productDetails.price &&
-              productDetails.price.formatted_with_symbol !== undefined
-                ? productDetails.price.formatted_with_symbol
-                : "loading price"}
-            </Typography>
-            <Divider />{" "}
-            <Button
-              className={globalClasses.button}
-              // () => globalDispatch({ type: "OPENCART" })
-              onClick={() => {
-                value.handleAddToCart(productDetails.id, 1);
-                globalDispatch({ type: "OPENCART" });
-              }}
-            >
-              ADD TO CART
-            </Button>
-            <Typography
-              dangerouslySetInnerHTML={{ __html: productDetails.description }}
-              variant="subtitle2"
-            />
-            <Grid
-              container
-              justify="center"
-              style={{ gap: "5rem", marginBottom: "2rem" }}
-            >
-              <FacebookIcon />
-              <TwitterIcon />
-              <PinterestIcon />
+        {!loading ? (
+          <Grid style={{ margin: "auto" }} container>
+            <Grid item xs={12} md={7}>
+              <ImgGallery assets={productDetails.assets} />
             </Grid>
-            {video ? <YouTube videoId={video} opts={opts} /> : <div></div>}
+            <Grid item xs={12} md={5} className={classes.details}>
+              <div>
+                <Typography variant="h4" gutterBottom>
+                  {productDetails.name}
+                </Typography>
+                {productDetails.quantity === 0 ? (
+                  <Grid container style={{ gap: "2rem" }}>
+                    {" "}
+                    <Typography variant="subtitle1">{price}</Typography>
+                    <Button
+                      className={globalClasses.button}
+                      disabled
+                      style={{ color: "#fff", width: "fit-content" }}
+                    >
+                      SOLD OUT
+                    </Button>
+                  </Grid>
+                ) : (
+                  <Typography variant="subtitle1">{price}</Typography>
+                )}
+                <Divider style={{ margin: "2rem 0" }} />{" "}
+                {productDetails.quantity === 0 ? (
+                  <Button className={globalClasses.button}>
+                    TEST PURCHASE
+                  </Button>
+                ) : (
+                  <Button
+                    className={globalClasses.button}
+                    onClick={() => {
+                      value.handleAddToCart(productDetails.id, 1);
+                      globalDispatch({ type: "OPENCART" });
+                    }}
+                  >
+                    ADD TO CART
+                  </Button>
+                )}
+              </div>
+
+              <Typography
+                dangerouslySetInnerHTML={{
+                  __html: productDetails.description,
+                }}
+                variant="subtitle2"
+              />
+              <Grid
+                container
+                justify="center"
+                style={{ gap: "5rem", marginBottom: "2rem" }}
+              >
+                <FacebookIcon />
+                <TwitterIcon />
+                <PinterestIcon />
+              </Grid>
+              {video && <YouTube videoId={video} opts={opts} />}
+            </Grid>
           </Grid>
-        </Grid>
+        ) : (
+          <Skeletons3 />
+        )}
         <Typography variant="h4" style={{ margin: "3rem 0" }}>
           YOU MAY ALSO LIKE
         </Typography>
-        <Related productDetails={productDetails} />
-        <Button
-          component={Link}
-          to={`/collections/:categories/${slug}`}
-          className={globalClasses.button}
-          style={{
-            marginTop: "5rem",
-            width: "fit-content",
-          }}
-        >
-          <ArrowRightAltIcon style={{ transform: "rotate(180deg)" }} />
-          &nbsp;Back to {slug}
-        </Button>
+        {!loading ? (
+          <Related productDetails={productDetails} />
+        ) : (
+          <Skeletons2 fill2={5} nowrap="nowrap" />
+        )}
+
+        {slug && (
+          <Button
+            component={Link}
+            to={`/collections/:categories/${slug}`}
+            className={globalClasses.button}
+            style={{
+              marginTop: "5rem",
+              width: "fit-content",
+            }}
+          >
+            <ArrowRightAltIcon style={{ transform: "rotate(180deg)" }} />
+            &nbsp;Back to {slug}
+          </Button>
+        )}
       </Grid>
       <Divider style={{ width: "100%", marginBottom: "4rem" }} />
     </>

@@ -9,13 +9,13 @@ export const reminders = [
       "for your support of our small family business during this Christmas season!",
   },
   {
-    title: "Free shipping on dreamware orders in the usa",
-    sub: "$8 flate rate shipping on all other USA orders.",
+    title: "Free shipping on dreamcube orders in the philippines",
+    sub: "$8 flate rate shipping on all other PHILLIPINES orders.",
   },
   {
     title: "Current processing time:",
     sub:
-      "8-12 weeks for all dreamware orders, 3-5 business days for in-stock items. Contact us for rush orders.",
+      "8-12 weeks for all dreamcube orders, 3-5 business days for in-stock items. Contact us for rush orders.",
   },
 ];
 

@@ -48,7 +48,7 @@ const Checkout = () => {
 
         setCheckoutToken(token);
       } catch (error) {
-        // history.push("/");
+        history.push("/");
       }
     };
 
@@ -70,7 +70,7 @@ const Checkout = () => {
     setTimeout(() => {
       setIsFinished(true);
       value.refreshCart();
-    }, 5000);
+    }, 300);
   };
 
   let Confirmation = () =>

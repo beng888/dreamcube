@@ -1,4 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
+import Background from "../../assets/offer1.jpg";
+import Background2 from "../../assets/offer2.jpg";
+import Background3 from "../../assets/dreamcube.jpg";
 
 export default makeStyles((theme) => ({
   container: {},
@@ -26,6 +29,9 @@ export default makeStyles((theme) => ({
     height: "99vh",
     padding: "60px 60px 0px 60px",
     width: "50%",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
 
     "& h4": { margin: "1rem" },
     "& button": {
@@ -34,9 +40,10 @@ export default makeStyles((theme) => ({
       alignSelf: "center",
       padding: "11px 20px",
       letterSpacing: "0.3em",
-      color: "#fff",
       border: "2px solid #fff",
       textShadow: "0px 0px 2px #000",
+
+      "& a": { color: "#fff" },
     },
 
     "&::after": {
@@ -47,15 +54,14 @@ export default makeStyles((theme) => ({
       left: "8px",
       right: "8px",
       border: "2px solid #F4F1E9",
+      pointerEvents: "none",
     },
     "&:first-child:after": { border: "2px solid #48494D" },
     "&:first-child": {
-      background: `url("https://vignette.wikia.nocookie.net/something-wicked/images/0/08/Puzzle-4.jpg/revision/latest?cb=20180402201409") center no-repeat`,
-      backgroundSize: "cover",
+      backgroundImage: `url(${Background})`,
     },
     "&:nth-child(2)": {
-      background: `url("https://kagensound.com/puzzles/2019/Infernal%20Box/Infernalopen.jpg") center no-repeat`,
-      backgroundSize: "cover",
+      backgroundImage: `url(${Background2})`,
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -109,7 +115,7 @@ export default makeStyles((theme) => ({
     },
   },
   dreamCubeBG: {
-    background: `url("https://cdn.shopify.com/s/files/1/0200/7616/articles/history-of-the-burr-puzzle_1024x1024.jpg?v=1479741758") center no-repeat`,
+    backgroundImage: `url(${Background3})`,
     backgroundSize: "cover",
     position: "absolute",
     left: "0",

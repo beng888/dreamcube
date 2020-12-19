@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { commerce } from "../../lib/commerce";
 import useStyles from "./styles";
 
+import Skeletons from "../../utils/Skeletons";
+import Skeletons2 from "../../utils/Skeletons2";
 import Pagination from "./Pagination/Pagination";
 
 const Categories = ({ location, match }) => {
@@ -12,9 +14,10 @@ const Categories = ({ location, match }) => {
   const [, ...b] = a;
   const [c] = a;
 
-  console.log(c);
+  // console.log(c);
   // const [category, setCategory] = useState([]);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   b.forEach(async (i) => {
@@ -28,17 +31,23 @@ const Categories = ({ location, match }) => {
 
   //*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-  const fetchProducts = async function () {
+  // TODO ||||||||||||||||||||||||||||||||||||||
+  const fetchProducts = async function (error) {
     let results = await Promise.all(
       b.map(async (item) => {
         let data = await commerce.products.list({ category_slug: item });
         return data;
       })
     );
+
     setProducts(results);
+    setLoading(false);
+    return Promise.reject(error);
   };
 
   useEffect(() => {
+    setLoading(true);
+
     fetchProducts();
   }, []);
 
@@ -75,43 +84,56 @@ const Categories = ({ location, match }) => {
       direction="row"
       className={classes.container}
     >
-      <Grid container direction="column" item xs={12}>
-        <Typography variant="h3" gutterBottom>
-          DREAMWARE COLLECTION
-        </Typography>
-        <br />
-        <Typography variant="body1" gutterBottom>
-          Traditionally handcrafted from the finest hardwoods, dreamware is the
-          heart and soul of Old World Kitchen. Long before we began offering
-          other fine kitchen and dining products made by talented artisans
-          around the USA, our family was hand carving the kitchenware of your
-          dreams. Each piece is still designed, crafted and packaged by our own
-          family, right on our farm. Dreamware is how Old World Kitchen started,
-          and will always be the pillar of our brand. We have sent thousands of
-          pieces of our luxury kitchenware all over the entire world, and it is
-          a special pleasure to us to be able to offer the finest handmade
-          kitchen utensils available anywhere. We hope that you treasure and
-          enjoy using our dreamware as much as we love making it.{" "}
-        </Typography>{" "}
-        <br />
-        <Typography variant="body1" gutterBottom>
-          These items are all MADE TO ORDER. Please refer to the scrolling
-          banner at the top of our webpage for current processing times. If you
-          need something right away, please visit our Ready To Ship Dreamware or
-          Ready to Ship Gift Sets collections!
-        </Typography>{" "}
-        <br /> <br />
-        <Typography
-          variant="body1"
-          gutterBottom
-          style={{ alignSelf: "flex-start" }}
-        >
-          {datas.length} products
-        </Typography>
-        <br />
-      </Grid>
-      <Pagination category={category} datas={datas} />
-
+      {!loading ? (
+        <>
+          <Grid container direction="column" item xs={12}>
+            <Typography variant="h3" gutterBottom>
+              {c}
+            </Typography>
+            <br />
+            <Typography variant="body1" gutterBottom>
+              Traditionally handcrafted from the finest hardwoods, dreamcube is
+              the heart and soul of Parabox. Long before we began offering other
+              fine Puzzle Boxes made by talented artisans around the Japan, our
+              family was hand carving the puzzles of your dreams. Each piece is
+              still designed, crafted and packaged by our own family, right on
+              our workshop. Dreamcube is how Parabox started, and will always be
+              the pillar of our brand. We have sent thousands of pieces of our
+              luxury puzzles all over the entire world, and it is a special
+              pleasure to us to be able to offer the finest Puzzleboxes
+              available anywhere. We hope that you treasure and enjoy using our
+              dreamcube as much as we love making it.
+            </Typography>
+            <br />
+            <Typography variant="body1" gutterBottom>
+              These items are all MADE TO ORDER. Please refer to the scrolling
+              banner at the top of our webpage for current processing times. If
+              you need something right away, please visit our Ready To Ship
+              Dreamcube or Ready to Ship Gift Sets collections!
+            </Typography>
+            <br /> <br />
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ alignSelf: "flex-start" }}
+            >
+              {datas.length
+                ? datas.length + " products"
+                : "Loading Products..."}
+            </Typography>
+            <br />
+          </Grid>
+          <Pagination category={category} datas={datas} c={c} />
+        </>
+      ) : (
+        <>
+          {c === "ALL PRODUCTS" && (
+            <Typography variant="h2">This will take a while</Typography>
+          )}
+          <Skeletons fill={20} />
+          <Skeletons2 fill2={4} />
+        </>
+      )}
       {/* {product} */}
     </Grid>
   );

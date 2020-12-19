@@ -1,45 +1,41 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { useTheme } from "@material-ui/core/styles";
+import React from "react";
 import TablePagination from "@material-ui/core/TablePagination";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
 import {
-  Button,
   Divider,
   Grid,
   Table,
-  TableBody,
   TableFooter,
   TableRow,
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 import TablePaginationActions from "./sections/TablePaginationActions";
 import Items from "./sections/Items";
 
 import useStyles from "../styles";
 import { Link } from "react-router-dom";
+import Videos from "./sections/Videos";
 
-export default function Pagination({ datas, category }) {
+export default function Pagination({ datas, category, c }) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [rowsPerPage, setRowsPerPage] = React.useState(20);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    window.scrollTo(0, 800);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  console.log(category);
+  let random = category && category.sort(() => 0.5 - Math.random()).slice(0, 4);
 
   //?\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -60,17 +56,10 @@ export default function Pagination({ datas, category }) {
   //?\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
   const useStyles2 = makeStyles((theme) => ({
-    Items: {
-      minHeight: `${(rowsPerPage / 2) * 50}vw  `,
-      [theme.breakpoints.down("xs")]: {
-        minHeight: `${rowsPerPage * 100}vw  `,
-      },
-    },
-
     category: {
       minHeight: "20vw",
       [theme.breakpoints.down("xs")]: {
-        minHeight: "150vw",
+        "& p": { fontSize: "0.7rem" },
       },
     },
   }));
@@ -78,22 +67,33 @@ export default function Pagination({ datas, category }) {
 
   return (
     <>
-      <Grid container justify="center" spacing={3} className={classes2.Items}>
-        {(rowsPerPage > 0
-          ? datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          : datas
-        ).map((d) => (
-          <Items d={d} />
-        ))}
-      </Grid>
+      {c === "NOTABLES CRAFTSMEN WORKS" ? (
+        <Grid container justify="center" spacing={3}>
+          {(rowsPerPage > 0
+            ? datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : datas
+          ).map((d, i) => (
+            <Videos key={i} d={d} />
+          ))}
+        </Grid>
+      ) : (
+        <Grid container justify="center" spacing={3}>
+          {(rowsPerPage > 0
+            ? datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : datas
+          ).map((d, i) => (
+            <Items key={i} d={d} />
+          ))}
+        </Grid>
+      )}
       <div style={{ height: "50px", width: "50px" }} />
       <Grid container spacing={3} className={classes2.category}>
-        {category.map((d) => (
+        {random.map((d) => (
           <Grid
             component={Link}
             to={`/collections/:categories/${d.categories[0].slug}`}
             xs={6}
-            sm={2}
+            md={2}
             item
             key={d.id}
             className={classes.categories}
@@ -121,7 +121,6 @@ export default function Pagination({ datas, category }) {
                 classes={{
                   root: classes.paginationRoot,
                   toolbar: classes.toolbar,
-                  gutters: classes.gutters,
                 }}
                 rowsPerPageOptions={[4, 8, 12, { label: "All", value: -1 }]}
                 colSpan={6}

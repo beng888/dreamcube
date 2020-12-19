@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import BG from "../../assets/navBG.jpg";
 
 export default makeStyles((theme, location) => ({
   carousel: {
@@ -36,7 +37,7 @@ export default makeStyles((theme, location) => ({
   },
 
   appBarBackground: {
-    background: `url('https://cdn.shopify.com/s/files/1/0122/9422/products/DSCF0510_2080x.jpg?v=1598506193')`,
+    backgroundImage: `url(${BG})`,
     backgroundSize: "cover",
     position: "absolute",
     margin: "auto",
@@ -67,7 +68,7 @@ export default makeStyles((theme, location) => ({
     padding: "0.5rem 1.5rem",
     cursor: "pointer",
     letterSpacing: "5px",
-    backgroundColor: "transparent",
+    margin: "0 1px",
 
     "&:hover": {
       color: "#000",
@@ -77,11 +78,31 @@ export default makeStyles((theme, location) => ({
     position: "absolute",
     background: "inherit",
     width: "inherit",
-    boxShadow: "0px 0px 5px 5px rgba(0,0,0,0.2)",
+    boxShadow: "0px 4px 5px 3px rgba(0,0,0,0.1)",
+    display: "flex",
+    flexDirection: "column-reverse",
   },
 
   menuList: {
     fontSize: "1rem",
     padding: "8px 15px",
+  },
+  menuLink: {
+    padding: "0.5rem 1.5rem",
+    color: "inherit",
+    letterSpacing: "5px",
+    "&:hover:after": {
+      color: "inherit",
+      width: "100%",
+      transition: "0.5s ease-out",
+      border: "1px solid",
+    },
+    "&:after": {
+      content: '""',
+      display: "block",
+      width: "0",
+      border: "1px solid transparent",
+      transition: "0.5s",
+    },
   },
 }));

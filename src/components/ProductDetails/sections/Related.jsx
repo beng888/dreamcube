@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import useStyles from "../styles";
 
@@ -10,7 +11,7 @@ const Related = ({ productDetails }) => {
   const classes = useStyles();
 
   const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.5 });
+  const [ref, inView] = useInView({ delay: 3 });
 
   useEffect(() => {
     if (inView) {
@@ -25,6 +26,14 @@ const Related = ({ productDetails }) => {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { duration: 1 } },
   };
+
+  const related = productDetails && productDetails.related_products;
+
+  console.log(related);
+
+  let random = related && related.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+  console.log(random);
 
   return (
     <motion.div
@@ -41,12 +50,13 @@ const Related = ({ productDetails }) => {
         className={classes.related}
         style={{ minHeight: "20vw", gap: "1rem" }}
       >
-        {productDetails && productDetails.related_products !== undefined ? (
-          productDetails.related_products.slice(0, 5).map((product) => (
+        {related !== undefined ? (
+          random.map((product) => (
             <Grid item xs={2} key={product.id} className={classes.relatedItems}>
               <Link to={`/collections/:categories/:category/${product.id}`}>
                 {" "}
                 <motion.img
+                  layout
                   variants={items}
                   src={product.media.source}
                   alt={product.name}
@@ -58,14 +68,12 @@ const Related = ({ productDetails }) => {
                 {product.name}&nbsp;|&nbsp;{productDetails.categories[0].name}
               </Typography>
               <Typography variant="body2">
-                {productDetails.price.formatted_with_symbol}
+                {product.price.formatted_with_symbol}
               </Typography>
             </Grid>
           ))
         ) : (
-          <div>
-            <h1>loading...</h1>
-          </div>
+          <Skeleton variant="rect" width="100%" height="400px" />
         )}
       </Grid>
     </motion.div>

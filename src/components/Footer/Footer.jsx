@@ -11,9 +11,12 @@ import PolymerIcon from "@material-ui/icons/Polymer";
 import GTranslateIcon from "@material-ui/icons/GTranslate";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import TelegramIcon from "@material-ui/icons/Telegram";
-
-import useStyles from "./styles";
 import { withRouter } from "react-router-dom";
+
+import BG1 from "../../assets/footer1.jpg";
+import BG2 from "../../assets/footer2.jpg";
+import BG3 from "../../assets/footer3.jpg";
+import useStyles from "./styles";
 
 const Footer = withRouter(({ location }) => {
   const classes = useStyles();
@@ -29,10 +32,7 @@ const Footer = withRouter(({ location }) => {
           className={classes.footer}
         >
           <Grid item md={4}>
-            <img
-              src="https://static.toiimg.com/photo/66476526.cms"
-              alt="advert pic"
-            />
+            <img src={BG1} alt="advert pic" />
             <Typography variant="h5">SAVE 20% ON DREAMCUBE</Typography>
             <Typography variant="subtitle2">
               Sign up for our TEXT ALERTS and we will send you a code for 20%
@@ -42,22 +42,21 @@ const Footer = withRouter(({ location }) => {
             </Typography>
           </Grid>
           <Grid item md={4}>
-            <img
-              src="https://static.toiimg.com/photo/66476526.cms"
-              alt="advert pic"
-            />
-            <Typography variant="h5">JOIN OUR EMAIL LIST</Typography>
+            <img src={BG2} alt="advert pic" />
+            <Typography variant="h5">GOT A QUESTION? EMAIL US!</Typography>
             <Typography variant="subtitle2" gutterBottom>
               Sign up for our email updates and we will keep you informed about
               new products, sales, news about our family and projects and more!
             </Typography>
-            <Button variant="outlined">SIGN ME UP</Button>
+            <Button
+              variant="outlined"
+              onClick={() => window.open("mailto:lawrenceardosa@gmail.com")}
+            >
+              SEND AN EMAIL
+            </Button>
           </Grid>
           <Grid item md={4}>
-            <img
-              src="https://static.toiimg.com/photo/66476526.cms"
-              alt="advert pic"
-            />{" "}
+            <img src={BG3} alt="advert pic" />{" "}
             <Typography variant="h5">LIFETIME GUARANTEE</Typography>
             <Typography variant="subtitle2">
               We stand behind our work. Our hand carved PuzzleBoxes (dreamcube)
@@ -87,9 +86,24 @@ const Footer = withRouter(({ location }) => {
                 <YouTubeIcon />
                 <TelegramIcon />
               </Grid>
+              <Typography gutterBottom variant="BUTTON ">
+                DISCLAIMER!!!{" "}
+              </Typography>
+              <Typography gutterBottom variant="caption ">
+                This is a{" "}
+                <a href="https://lawrenceardosa.netlify.app/">PORTFOLIO</a>{" "}
+                Website, the design is based from{" "}
+                <a href="https://www.poldersoldworldmarket.com/">
+                  OLD WORLD KITCHEN
+                </a>
+                &nbsp;and the products are from{" "}
+                <a href="https://puzzleboxworld.com/collections/sale">
+                  PUZZLEBOXWORLD
+                </a>{" "}
+              </Typography>
               <Grid>
                 <Typography variant="caption">
-                  © 2020 Old World Kitchen | Jonesville, Virginia, USA
+                  © 2020 ParaBox | Taguig, Philippines
                 </Typography>
               </Grid>
             </Grid>

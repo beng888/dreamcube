@@ -10,7 +10,8 @@ export default makeStyles((theme) => ({
       width: "100%",
       height: "100%",
     },
-    "& img": { width: "100%", maxHeight: "400px" },
+    "& img": { width: "100%", maxHeight: "300px" },
+    "& a": { color: "blue" },
   },
   footerDivider: {
     marginBottom: "5rem",

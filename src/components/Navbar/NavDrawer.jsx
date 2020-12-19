@@ -6,6 +6,7 @@ import {
   Drawer,
   FormControlLabel,
   Grid,
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -26,10 +27,14 @@ const NavDrawer = ({ menus }) => {
   };
 
   const useStyles = makeStyles((theme) => ({
-    accordionRoot: { width: "100%" },
+    accordionRoot: { width: "300px", maxWidth: "100vw" },
     accordionSummaryRoot: { width: "100%" },
     formControlLabelRoot: { width: "100%", margin: "0" },
-    buttonRoot: { width: "100%", padding: "0.7 rem 1rem" },
+    buttonRoot: {
+      width: "100%",
+      padding: "0.7 rem 1rem",
+      fontSize: "1rem",
+    },
     accordionSummaryContent: {
       borderRight: "1px solid #b9b9b9",
     },
@@ -59,7 +64,7 @@ const NavDrawer = ({ menus }) => {
             <Button
               classes={{ root: classes.buttonRoot }}
               component={Link}
-              to="/"
+              to={`/collections/${name},${list}`}
             >
               {name}
             </Button>
@@ -70,9 +75,11 @@ const NavDrawer = ({ menus }) => {
         <ul>
           {list.map((listItem, l) => (
             <li key={l}>
-              <Link to={`/collections/:categories/${listItem.slug}`}>
-                {listItem.name}
-              </Link>
+              <Typography gutterBottom variant="subtitle2">
+                <Link to={`/collections/:categories/${listItem.slug}`}>
+                  {listItem.name}
+                </Link>
+              </Typography>
             </li>
           ))}
         </ul>
@@ -82,14 +89,37 @@ const NavDrawer = ({ menus }) => {
 
   return (
     <div>
-      <Drawer title="Menu" onClose={onClose} open={visible}>
+      <Drawer
+        transitionDuration={400}
+        title="Menu"
+        onClose={onClose}
+        open={visible}
+      >
         <Button
           onClick={onClose}
           style={{ alignSelf: "flex-end", margin: "0.5rem" }}
         >
           <CloseIcon />
         </Button>
+        <Button
+          style={{
+            borderTop: "1px solid lightgrey",
+            padding: "1.5rem 1rem",
+            fontSize: "1rem",
+          }}
+        >
+          HOME
+        </Button>
         {menuList}
+        <Button
+          style={{
+            borderBottom: "1px solid lightgrey",
+            padding: "1.5rem 1rem",
+            fontSize: "1rem",
+          }}
+        >
+          BLOG
+        </Button>
       </Drawer>
       <Grid
         color="inherit"

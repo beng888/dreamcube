@@ -1,6 +1,8 @@
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as Footer } from "./Footer/Footer";
 export { default as Home } from "./Home/Home";
+export { default as Blogs } from "./Blogs/Blogs";
+export { default as Blog } from "./Blog/Blog";
 export { default as Cart } from "./Cart/Cart";
 export { default as CartPage } from "./CartPage/CartPage";
 export { default as Categories } from "./Categories/Categories";

@@ -16,6 +16,7 @@ a {
 
 html {
   /* overflow-x: scroll; */
+  scroll-behavior: smooth;
 }
 body {
   font-family: "Georgia Pro", serif;
