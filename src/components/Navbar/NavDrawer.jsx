@@ -40,7 +40,7 @@ const NavDrawer = ({ menus }) => {
     },
     menuButton: {
       padding: "0",
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         display: "none",
       },
     },

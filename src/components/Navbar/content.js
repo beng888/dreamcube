@@ -10,7 +10,7 @@ export const reminders = [
   },
   {
     title: "Free shipping on dreamcube orders in the philippines",
-    sub: "$8 flate rate shipping on all other PHILLIPINES orders.",
+    sub: "₱10 flate rate shipping on all other PHILLIPINES orders.",
   },
   {
     title: "Current processing time:",

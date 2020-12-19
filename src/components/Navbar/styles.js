@@ -62,7 +62,7 @@ export default makeStyles((theme, location) => ({
     },
   },
 
-  menuContainer: { [theme.breakpoints.down("xs")]: { display: "none" } },
+  menuContainer: { [theme.breakpoints.down("sm")]: { display: "none" } },
 
   menu: {
     padding: "0.5rem 1.5rem",
