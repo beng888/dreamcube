@@ -1,10 +1,4 @@
-import {
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import { Button, Divider, Grid, Typography } from "@material-ui/core";
 import React, { useContext, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";

@@ -27,7 +27,7 @@ const ProductDetails = ({ match, location }) => {
   const [loading, setLoading] = useState(false);
   const value = useContext(AppContext);
 
-  const href = window.location.href;
+  // const href = window.location.href;
   // console.log(href);
 
   const fetchProductDetails = async () => {
@@ -68,10 +68,10 @@ const ProductDetails = ({ match, location }) => {
 
   console.log(slug);
 
-  const name =
-    productDetails.categories &&
-    productDetails.categories[0] &&
-    productDetails.categories[0].name;
+  // const name =
+  //   productDetails.categories &&
+  //   productDetails.categories[0] &&
+  //   productDetails.categories[0].name;
 
   const price =
     productDetails &&

@@ -1,5 +1,5 @@
 import { Button, Divider, Grid, Typography } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { AppContext } from "../../lib/commerce";

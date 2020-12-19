@@ -11,8 +11,8 @@ export const AppContext = createContext(null);
 export const ContextWrapper = (props) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [categoryProducts, setCategoryProducts] = useState([]);
+  // const [category, setCategory] = useState([]);
+  // const [categoryProducts, setCategoryProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");

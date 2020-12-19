@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import {
-  Typography,
   Button,
-  Divider,
   Grid,
   Accordion,
   AccordionSummary,
@@ -20,7 +18,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import test from "../../assets/test.png";
 
 import { AppContext } from "../../lib/commerce";
-import Review from "./Review";
 import globalStyles from "../../globalStyles";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);

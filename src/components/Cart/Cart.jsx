@@ -11,7 +11,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import globalStyles from "../../globalStyles";
 import { AppContext } from "../../lib/commerce";
-import { motion } from "framer-motion";
 
 const Cart = ({ onClose }) => {
   const value = useContext(AppContext);

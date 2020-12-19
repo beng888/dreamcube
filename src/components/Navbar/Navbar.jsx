@@ -54,7 +54,7 @@ const Navbar = withRouter(({ totalItems, location }) => {
 
   // var names = data.map(d => d.Name);
 
-  const Menu = menus[0].list.map((m) => m.slug);
+  // const Menu = menus[0].list.map((m) => m.slug);
   // console.log(Menu);
 
   const showMenu = {

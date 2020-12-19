@@ -1,5 +1,4 @@
 import { Badge, IconButton, Drawer } from "@material-ui/core";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import React, { useContext } from "react";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 

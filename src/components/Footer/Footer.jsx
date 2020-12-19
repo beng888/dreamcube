@@ -86,10 +86,10 @@ const Footer = withRouter(({ location }) => {
                 <YouTubeIcon />
                 <TelegramIcon />
               </Grid>
-              <Typography gutterBottom variant="BUTTON ">
+              <Typography gutterBottom variant="h6">
                 DISCLAIMER!!!{" "}
               </Typography>
-              <Typography gutterBottom variant="caption ">
+              <Typography gutterBottom variant="caption">
                 This is a{" "}
                 <a href="https://lawrenceardosa.netlify.app/">PORTFOLIO</a>{" "}
                 Website, the design is based from{" "}
